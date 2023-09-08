@@ -1,0 +1,26 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --ScissorsGradient: hsl(39, 89%, 49%) to hsl(40, 84%, 53%)
+  --ScissorsGradient: linear-gradient(
+      90deg,
+      hsl(39, 89%, 49%) 0%,
+      hsl(40, 84%, 53%) 100%
+  )
+  --PaperGradient: hsl(230, 89%, 62%) to hsl(230, 89%, 65%)
+  --RockGradient: hsl(349, 71%, 52%) to hsl(349, 70%, 56%)
+  --LizardGradient: hsl(261, 73%, 60%) to hsl(261, 72%, 63%)
+  --Cyan: hsl(189, 59%, 53%) to hsl(189, 58%, 57%)
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background: linear-gradient(
+      to bottom,
+      transparent,
+      rgb(var(--background-end-rgb))
+    )
+    rgb(var(--background-start-rgb));
+}

@@ -6,7 +6,7 @@ import { AnimatePresence } from "framer-motion";
 import MainPage from "./components/MainPage";
 import FramerMotionAnimation from "./components/FramerMotionAnimation";
 import Loading from "./components/Loading";
-import { useMediaQuery } from "@uidotdev/usehooks";
+import { type } from "os";
 
 // Working with LocalStorage in NextJs SSR
 function getStorageValue(key: string, defaultValue: string): string {
@@ -24,7 +24,7 @@ export default function Home() {
   const [winner, setWinner] = useState("");
   const [score, setScore] = useState<string>("");
   const [loading, setLoading] = useState(true);
-  const Duration = window.innerWidth < 768 ? 3 : 5;
+  const [Duration, setDuration] = useState(5);
 
   const handleComputerTurn = (move: string) => {
     setMove(move);
@@ -84,6 +84,9 @@ export default function Home() {
 
   useEffect(() => {
     setScore(getStorageValue("score", "0"));
+    if (typeof window !== "undefined") {
+      setDuration(window.innerWidth < 768 ? 3 : 5);
+    }
   }, []);
 
   useEffect(() => {

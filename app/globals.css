@@ -3,24 +3,84 @@
 @tailwind utilities;
 
 :root {
-  --ScissorsGradient: hsl(39, 89%, 49%) to hsl(40, 84%, 53%)
   --ScissorsGradient: linear-gradient(
-      90deg,
-      hsl(39, 89%, 49%) 0%,
-      hsl(40, 84%, 53%) 100%
-  )
-  --PaperGradient: hsl(230, 89%, 62%) to hsl(230, 89%, 65%)
-  --RockGradient: hsl(349, 71%, 52%) to hsl(349, 70%, 56%)
-  --LizardGradient: hsl(261, 73%, 60%) to hsl(261, 72%, 63%)
-  --Cyan: hsl(189, 59%, 53%) to hsl(189, 58%, 57%)
+    180deg,
+    hsl(39, 89%, 49%) 0%,
+    hsl(40, 84%, 53%) 100%
+  );
+  --PaperGradient: linear-gradient(
+    180deg,
+    hsl(230, 89%, 62%) 0%,
+    hsl(230, 89%, 65%) 100%
+  );
+  --RockGradient: linear-gradient(
+    180deg,
+    hsl(349, 71%, 52%) 0%,
+    hsl(349, 70%, 56%) 100%
+  );
+  --LizardGradient: linear-gradient(
+    180deg,
+    hsl(261, 73%, 60%) 0%,
+    hsl(261, 72%, 63%) 100%
+  );
+  --Cyan: linear-gradient(
+    180deg,
+    hsl(189, 59%, 53%) 0%,
+    hsl(189, 58%, 57%) 100%
+  );
+  --DarkText: hsl(229, 25%, 31%);
+  --ScoreText: hsl(229, 64%, 46%);
+  --HeaderOutline: hsl(217, 16%, 45%);
+  --BgColor: radial-gradient(
+    ellipse at top,
+    hsl(214, 47%, 23%),
+    hsl(237, 49%, 15%)
+  );
+  --ScissorsGradientShadow: 0 0.5em 0em -0.1em hsl(39, 89%, 35%);
+  --PaperGradientShadow: 0 0.5em 0em -0.1em hsl(230, 89%, 35%);
+  --RockGradientShadow: 0 0.5em 0em -0.1em hsl(349, 71%, 35%);
+  --innerShadow: inset 0 0.8em 0 -0.2em hsla(0, 0%, 56%, 0.5);
+  --whiteGradient: linear-gradient(
+    180deg,
+    hsl(0, 0%, 76%) 0%,
+    hsl(0, 0%, 100%) 100%
+  );
+  --triangleBg: url("./assets/images/bg-triangle.svg");
+  --grayscaleGradient: linear-gradient(180deg, #b8baca 0%, #b1b4c5 100%);
+  --grayscaleBg: #e1e4ed;
+  --shadowRadius: 2em;
+}
+
+@media (max-width: 768px) {
+  :root {
+    --shadowRadius: 1em;
+  }
 }
 
 body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  background: var(--BgColor);
+  background-size: 150%;
+  background-position: center;
+  color: rgb(237, 237, 237);
+  font-weight: 600;
+  text-transform: uppercase;
+  overflow-x: hidden;
+  width: 100%;
+  min-height: 100dvh;
+  height: 100dvh;
+  padding-bottom: 2em;
+  /* @media (max-width: 768px) {
+    overflow-y: hidden;
+  } */
+}
+
+body::-webkit-scrollbar {
+  width: 0.5px;
+}
+
+.bgMain {
+  background-image: var(--triangleBg);
+  background-position: center;
+  background-size: 50%;
+  background-repeat: no-repeat;
 }

@@ -117,7 +117,7 @@ export default function Home() {
         )}
         <button
           onClick={() => setModal(true)}
-          className="absolute md:bottom-8 md:right-8 bottom-0 right-1/2 md:translate-x-0 translate-x-1/2 px-10 text-xl py-2 border-2 border-white rounded-xl hover:rounded-3xl hover:px-14 transition-all duration-500"
+          className="mb-6 absolute md:bottom-8 md:right-8 bottom-0 right-1/2 md:translate-x-0 translate-x-1/2 px-10 text-xl py-2 border-2 border-white rounded-xl hover:rounded-3xl hover:px-14 transition-all duration-500"
         >
           Rules
         </button>

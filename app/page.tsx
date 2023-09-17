@@ -24,7 +24,7 @@ export default function Home() {
   const [winner, setWinner] = useState("");
   const [score, setScore] = useState<string>("");
   const [loading, setLoading] = useState(true);
-  const Duration = useMediaQuery("(max-width: 768px)") ? 3 : 5;
+  const Duration = window.innerWidth < 768 ? 3 : 5;
 
   const handleComputerTurn = (move: string) => {
     setMove(move);

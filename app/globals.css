@@ -73,6 +73,9 @@ body {
 body::-webkit-scrollbar {
   width: 0.5px;
 }
+body::-moz-scrollbar {
+  width: 0.5px;
+}
 
 .bgMain {
   background-image: var(--triangleBg);

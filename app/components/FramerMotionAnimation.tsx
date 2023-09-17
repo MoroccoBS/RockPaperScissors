@@ -1,7 +1,7 @@
 "use client";
 import { useAnimate, motion } from "framer-motion";
 import PlayButton from "./PlayButton";
-import { useEffect, useLayoutEffect, useState } from "react";
+import { useLayoutEffect } from "react";
 import { useMediaQuery } from "@uidotdev/usehooks";
 
 interface FightAnimationProps {
@@ -11,6 +11,7 @@ interface FightAnimationProps {
   computerChoice: string;
   setComputerChoice: React.Dispatch<React.SetStateAction<string>>;
   setMove: React.Dispatch<React.SetStateAction<string>>;
+  Duration: number;
 }
 
 const boxShadow = {
@@ -25,113 +26,118 @@ function FightAnimation({
   computerChoice,
   setMove,
   setComputerChoice,
+  Duration,
 }: FightAnimationProps) {
   const [scope, animate] = useAnimate();
   const isMobile = useMediaQuery("(max-width: 768px)");
 
   const PlayAnimation = () => {
     if (!isMobile) {
-      animate([
-        [".winningText", { y: -1000, opacity: 0 }],
-        [".player", { x: 0, opacity: 1 }, { delay: 0.5 }],
-        [".comp", { x: 0, opacity: 1 }, { delay: 0.5, at: "<" }],
-        [".compHolder", { opacity: 0 }, { delay: 1 }],
-        [".compPlay", { opacity: 1, pointerEvents: "auto", scale: 1 }],
-        [".player", { x: 75 }],
-        [".comp", { x: -75 }, { at: "<" }],
-        [".player", { x: 0 }],
-        [".comp", { x: 0 }, { at: "<" }],
-        [".player", { x: 75 }],
-        [".comp", { x: -75 }, { at: "<" }],
-        [".player", { x: 0 }],
-        [".comp", { x: 0 }, { at: "<" }],
-        [".player", { x: -100 }, { delay: 0.5 }],
-        [".comp", { x: 100 }, { delay: 0.5, at: "<" }],
-        [".winningText", { y: "100%" }],
+      animate(
         [
-          ".compPlay",
-          {
-            boxShadow:
-              isWinner === "Computer" ? boxShadow.end : boxShadow.start,
-            scale: isWinner === "Computer" ? 1.25 : 1,
-          },
-          { at: "<" },
+          [".player", { x: 0, opacity: 1 }, { delay: 0.5 }],
+          [".comp", { x: 0, opacity: 1 }, { delay: 0.5, at: "<" }],
+          [".compHolder", { opacity: 0 }, { delay: 1 }],
+          [".compPlay", { opacity: 1, pointerEvents: "auto", scale: 1 }],
+          [".player", { x: 75 }],
+          [".comp", { x: -75 }, { at: "<" }],
+          [".player", { x: 0 }],
+          [".comp", { x: 0 }, { at: "<" }],
+          [".player", { x: 75 }],
+          [".comp", { x: -75 }, { at: "<" }],
+          [".player", { x: 0 }],
+          [".comp", { x: 0 }, { at: "<" }],
+          [".player", { x: -100 }, { delay: 0.5 }],
+          [".comp", { x: 100 }, { delay: 0.5, at: "<" }],
+          [".winningText", { y: "100%" }],
+          [
+            ".compPlay",
+            {
+              boxShadow:
+                isWinner === "Computer" ? boxShadow.end : boxShadow.start,
+              scale: isWinner === "Computer" ? 1.25 : 1,
+            },
+            { at: "<" },
+          ],
+          [
+            ".playerPlay",
+            {
+              boxShadow:
+                isWinner === "Player" ? boxShadow.end : boxShadow.start,
+              scale: isWinner === "Player" ? 1.25 : 1,
+            },
+            { at: "<" },
+          ],
+          [
+            ".compPlay",
+            {
+              scale: 1,
+            },
+          ],
+          [".playerPlay", { scale: 1 }, { at: "<" }],
+          [".winningText", { opacity: 1, scale: 1.1 }],
+          [".winningText", { scale: 1 }],
         ],
-        [
-          ".playerPlay",
-          {
-            boxShadow: isWinner === "Player" ? boxShadow.end : boxShadow.start,
-            scale: isWinner === "Player" ? 1.25 : 1,
-          },
-          { at: "<" },
-        ],
-        [
-          ".compPlay",
-          {
-            scale: 1,
-          },
-        ],
-        [".playerPlay", { scale: 1 }, { at: "<" }],
-        [".winningText", { opacity: 1, scale: 1.1 }],
-        [".winningText", { scale: 1 }],
-      ]);
+        { duration: Duration }
+      );
     } else {
-      animate([
-        // [".winningText", { y: 1000, opacity: 0 }],
-        [".player", { x: 0, opacity: 1 }, { delay: 0.5 }],
-        [".comp", { x: 0, opacity: 1 }, { delay: 0.5, at: "<" }],
-        [".compHolder", { opacity: 0 }, { delay: 1 }],
-        [".compPlay", { opacity: 1, pointerEvents: "auto", scale: 1 }],
-        // [".player", { x: 25 }],
-        // [".comp", { x: -25 }, { at: "<" }],
-        // [".player", { x: 0 }],
-        // [".comp", { x: 0 }, { at: "<" }],
-        // [".player", { x: 25 }],
-        // [".comp", { x: -25 }, { at: "<" }],
-        // [".player", { x: 0 }],
-        // [".comp", { x: 0 }, { at: "<" }],
-        [".winningText", { y: "225%" }],
+      animate(
         [
-          ".compPlay",
-          {
-            boxShadow:
-              isWinner === "Computer" ? boxShadow.end : boxShadow.start,
-            scale: isWinner === "Computer" ? 1.25 : 1,
-          },
-          { at: "<" },
+          [".player", { x: 0, opacity: 1 }, { delay: 0.5 }],
+          [".comp", { x: 0, opacity: 1 }, { delay: 0.5, at: "<" }],
+          [".compHolder", { opacity: 0 }, { delay: 1 }],
+          [".compPlay", { opacity: 1, pointerEvents: "auto", scale: 1 }],
+          [".winningText", { y: "225%" }],
+          [
+            ".compPlay",
+            {
+              boxShadow:
+                isWinner === "Computer" ? boxShadow.end : boxShadow.start,
+              scale: isWinner === "Computer" ? 1.25 : 1,
+            },
+            { at: "<" },
+          ],
+          [
+            ".playerPlay",
+            {
+              boxShadow:
+                isWinner === "Player" ? boxShadow.end : boxShadow.start,
+              scale: isWinner === "Player" ? 1.25 : 1,
+            },
+            { at: "<" },
+          ],
+          [
+            ".compPlay",
+            {
+              scale: isWinner === "Computer" ? 1.1 : 1,
+              opacity: isWinner === "Computer" ? 1 : 0.75,
+            },
+          ],
+          [
+            ".playerPlay",
+            {
+              scale: isWinner === "Player" ? 1.1 : 1,
+              opacity: isWinner === "Player" ? 1 : 0.75,
+            },
+            { at: "<" },
+          ],
+          [".winningText", { opacity: 1, scale: 1.1 }],
+          [".winningText", { scale: 1 }],
         ],
-        [
-          ".playerPlay",
-          {
-            boxShadow: isWinner === "Player" ? boxShadow.end : boxShadow.start,
-            scale: isWinner === "Player" ? 1.25 : 1,
-          },
-          { at: "<" },
-        ],
-        [
-          ".compPlay",
-          {
-            scale: isWinner === "Computer" ? 1.1 : 1,
-            opacity: isWinner === "Computer" ? 1 : 0.75,
-          },
-        ],
-        [
-          ".playerPlay",
-          {
-            scale: isWinner === "Player" ? 1.1 : 1,
-            opacity: isWinner === "Player" ? 1 : 0.75,
-          },
-          { at: "<" },
-        ],
-        [".winningText", { opacity: 1, scale: 1.1 }],
-        [".winningText", { scale: 1 }],
-      ]);
+        { duration: Duration }
+      );
     }
   };
 
   useLayoutEffect(() => {
     PlayAnimation();
   }, [move]);
+
+  const handlePlayAgain = () => {
+    setMove("");
+    setComputerChoice("");
+    setWinner("");
+  };
 
   return (
     <div
@@ -173,11 +179,7 @@ function FightAnimation({
           </h1>
           <button
             className="w-full md:text-4xl text-3xl p-2 rounded-xl bg-white text-DarkText "
-            onClick={() => {
-              setWinner("");
-              setMove("");
-              setComputerChoice("");
-            }}
+            onClick={handlePlayAgain}
           >
             <h1 className="-translate-y-1">Play Again</h1>
             {/* I did this because the text was pushed to the bottom somehow */}

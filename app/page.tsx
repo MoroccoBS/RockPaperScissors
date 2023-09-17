@@ -5,6 +5,8 @@ import RulesModal from "./components/RulesModal";
 import { AnimatePresence } from "framer-motion";
 import MainPage from "./components/MainPage";
 import FramerMotionAnimation from "./components/FramerMotionAnimation";
+import Loading from "./components/Loading";
+import { useMediaQuery } from "@uidotdev/usehooks";
 
 // Working with LocalStorage in NextJs SSR
 function getStorageValue(key: string, defaultValue: string): string {
@@ -21,6 +23,8 @@ export default function Home() {
   const [computerChoice, setComputerChoice] = useState("");
   const [winner, setWinner] = useState("");
   const [score, setScore] = useState<string>("");
+  const [loading, setLoading] = useState(true);
+  const Duration = useMediaQuery("(max-width: 768px)") ? 3 : 5;
 
   const handleComputerTurn = (move: string) => {
     setMove(move);
@@ -47,6 +51,9 @@ export default function Home() {
   };
 
   useEffect(() => {
+    setTimeout(() => {
+      setLoading(false);
+    }, 2000);
     if (computerChoice === "" || move === "") {
       return;
     } else {
@@ -64,16 +71,17 @@ export default function Home() {
             }
             return (parseFloat(prev) - 1).toString();
           });
-        }, 5500);
+        }, Duration * 1000);
       } else if (winner === "Player") {
         setTimeout(() => {
           setScore((prev) => {
             return (parseFloat(prev) + 1).toString();
           });
-        }, 5500);
+        }, Duration * 1000);
       }
     }
-  }, [computerChoice, move]);
+  }, [computerChoice, move, Duration]);
+
   useEffect(() => {
     setScore(getStorageValue("score", "0"));
   }, []);
@@ -84,16 +92,18 @@ export default function Home() {
 
   return (
     <>
-      <AnimatePresence mode="wait">
+      <AnimatePresence mode="wait">{loading && <Loading />}</AnimatePresence>
+      <AnimatePresence>
         {modal && <RulesModal setModal={setModal} />}
       </AnimatePresence>
-      <main className="flex min-h-screen h-screen flex-col items-center gap-14 sm:p-6 p-4 relative overflow-hidden">
+      <main className="flex min-h-screen h-max flex-col items-center gap-14 sm:p-6 p-4 relative overflow-hidden">
         <NavBar score={score} />
         <AnimatePresence mode="wait">
           {winner === "" && <MainPage setMove={handleComputerTurn} />}
         </AnimatePresence>
         {winner !== "" && (
           <FramerMotionAnimation
+            Duration={Duration}
             isWinner={winner}
             move={move}
             setWinner={setWinner}

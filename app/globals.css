@@ -67,11 +67,8 @@ body {
   overflow-x: hidden;
   width: 100%;
   min-height: 100dvh;
-  height: 100dvh;
+  max-height: max-content;
   padding-bottom: 2em;
-  /* @media (max-width: 768px) {
-    overflow-y: hidden;
-  } */
 }
 
 body::-webkit-scrollbar {

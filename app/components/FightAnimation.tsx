@@ -1,4 +1,4 @@
-import { AnimatePresence, motion } from "framer-motion";
+import { motion } from "framer-motion";
 import PlayButton from "./PlayButton";
 import { useLayoutEffect, useRef } from "react";
 import gsap from "gsap";

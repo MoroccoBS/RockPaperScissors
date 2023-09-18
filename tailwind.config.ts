@@ -20,6 +20,8 @@ const config: Config = {
         ScissorsGradientShadow: "var(--ScissorsGradientShadow)",
         PaperGradientShadow: "var(--PaperGradientShadow)",
         RockGradientShadow: "var(--RockGradientShadow)",
+        LizardGradientShadow: "var(--LizardGradientShadow)",
+        SpockGradientShadow: "var(--SpockGradientShadow)",
         InnerShadow: "var(--innerShadow)",
       },
       backgroundImage: {
@@ -27,8 +29,8 @@ const config: Config = {
         PaperGradient: "var(--PaperGradient)",
         RockGradient: "var(--RockGradient)",
         LizardGradient: "var(--LizardGradient)",
+        SpockGradient: "var(--SpockGradient)",
         WhiteGradient: "var(--whiteGradient)",
-        TriangleBg: "var(--triangleBg)",
         GrayscaleGradient: "var(--grayscaleGradient)",
       },
     },

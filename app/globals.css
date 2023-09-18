@@ -23,7 +23,7 @@
     hsl(261, 73%, 60%) 0%,
     hsl(261, 72%, 63%) 100%
   );
-  --Cyan: linear-gradient(
+  --SpockGradient: linear-gradient(
     180deg,
     hsl(189, 59%, 53%) 0%,
     hsl(189, 58%, 57%) 100%
@@ -36,9 +36,11 @@
     hsl(214, 47%, 23%),
     hsl(237, 49%, 15%)
   );
-  --ScissorsGradientShadow: 0 0.5em 0em -0.1em hsl(39, 89%, 35%);
-  --PaperGradientShadow: 0 0.5em 0em -0.1em hsl(230, 89%, 35%);
-  --RockGradientShadow: 0 0.5em 0em -0.1em hsl(349, 71%, 35%);
+  --ScissorsGradientShadow: 0 0.5em 0em -0.1em hsl(28, 78%, 44%);
+  --PaperGradientShadow: 0 0.5em 0em -0.1em hsl(229, 63%, 46%);
+  --RockGradientShadow: 0 0.5em 0em -0.1em hsl(347, 77%, 35%);
+  --LizardGradientShadow: 0 0.5em 0em -0.1em hsl(261, 51%, 44%);
+  --SpockGradientShadow: 0 0.5em 0em -0.1em hsl(194, 57%, 43%);
   --innerShadow: inset 0 0.8em 0 -0.2em hsla(0, 0%, 56%, 0.5);
   --whiteGradient: linear-gradient(
     180deg,
@@ -46,6 +48,7 @@
     hsl(0, 0%, 100%) 100%
   );
   --triangleBg: url("./assets/images/bg-triangle.svg");
+  --pentagonBg: url("./assets/images/bg-pentagon.svg");
   --grayscaleGradient: linear-gradient(180deg, #b8baca 0%, #b1b4c5 100%);
   --grayscaleBg: #e1e4ed;
   --shadowRadius: 2em;
@@ -54,6 +57,12 @@
 @media (max-width: 768px) {
   :root {
     --shadowRadius: 1em;
+    --ScissorsGradientShadow: 0 0.4em 0em -0.15em hsl(28, 78%, 44%);
+    --PaperGradientShadow: 0 0.4em 0em -0.15em hsl(229, 63%, 46%);
+    --RockGradientShadow: 0 0.4em 0em -0.15em hsl(347, 77%, 35%);
+    --LizardGradientShadow: 0 0.4em 0em -0.15em hsl(261, 51%, 44%);
+    --SpockGradientShadow: 0 0.4em 0em -0.15em hsl(194, 57%, 43%);
+    --innerShadow: inset 0 0.6em 0 -0.2em hsla(0, 0%, 56%, 0.5);
   }
 }
 
@@ -80,6 +89,13 @@ body::-moz-scrollbar {
 .bgMain {
   background-image: var(--triangleBg);
   background-position: center;
-  background-size: 50%;
+  background-size: 70%;
+  background-repeat: no-repeat;
+}
+
+.bgMainBonus {
+  background-image: var(--pentagonBg);
+  background-position: center;
+  background-size: 75%;
   background-repeat: no-repeat;
 }

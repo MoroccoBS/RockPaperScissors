@@ -1,12 +1,12 @@
 "use client";
 import { useEffect, useState } from "react";
-import NavBar from "./components/NavBar";
-import RulesModal from "./components/RulesModal";
+import NavBar from "../components/NavBar";
+import RulesModal from "../components/RulesModal";
 import { AnimatePresence } from "framer-motion";
-import MainPage from "./components/MainPage";
-import FramerMotionAnimation from "./components/FramerMotionAnimation";
-import Loading from "./components/Loading";
-import Footer from "./components/Footer";
+import FramerMotionAnimation from "../components/FramerMotionAnimation";
+import Loading from "../components/Loading";
+import MainPageBonus from "../components/MainPageBonus";
+import Footer from "../components/Footer";
 
 // Working with LocalStorage in NextJs SSR
 function getStorageValue(key: string, defaultValue: string): string {
@@ -15,11 +15,13 @@ function getStorageValue(key: string, defaultValue: string): string {
     : defaultValue;
 }
 
-const choices = ["Rock", "Paper", "Scissors"];
+const choices = ["Rock", "Paper", "Scissors", "Lizard", "Spock"];
 
 export default function Home() {
   const [modal, setModal] = useState(false);
-  const [move, setMove] = useState<"rock" | "paper" | "scissors" | string>("");
+  const [move, setMove] = useState<
+    "rock" | "paper" | "scissors" | "lizard" | "spock" | string
+  >("");
   const [computerChoice, setComputerChoice] = useState("");
   const [winner, setWinner] = useState("");
   const [score, setScore] = useState<string>("");
@@ -28,21 +30,35 @@ export default function Home() {
 
   const handleComputerTurn = (move: string) => {
     setMove(move);
-    const randomChoice = choices[Math.floor(Math.random() * 3)];
+    const randomChoice = choices[Math.floor(Math.random() * 5)];
     setComputerChoice(randomChoice);
   };
 
   const calculateWinner = (computerMove: string, playerMove: string) => {
     if (
-      (computerMove === "paper" && playerMove === "rock") ||
       (computerMove === "scissors" && playerMove === "paper") ||
+      (computerMove === "paper" && playerMove === "rock") ||
+      (computerMove === "rock" && playerMove === "lizard") ||
+      (computerMove === "lizard" && playerMove === "spock") ||
+      (computerMove === "spock" && playerMove === "scissors") ||
+      (computerMove === "paper" && playerMove === "spock") ||
+      (computerMove === "scissors" && playerMove === "lizard") ||
+      (computerMove === "spock" && playerMove === "rock") ||
+      (computerMove === "lizard" && playerMove === "paper") ||
       (computerMove === "rock" && playerMove === "scissors")
     ) {
       return "Computer";
     } else if (
-      (computerMove === "rock" && playerMove === "paper") ||
-      (computerMove === "paper" && playerMove === "scissors") ||
-      (computerMove === "scissors" && playerMove === "rock")
+      (playerMove === "scissors" && computerMove === "paper") ||
+      (playerMove === "paper" && computerMove === "rock") ||
+      (playerMove === "rock" && computerMove === "lizard") ||
+      (playerMove === "lizard" && computerMove === "spock") ||
+      (playerMove === "spock" && computerMove === "scissors") ||
+      (playerMove === "paper" && computerMove === "spock") ||
+      (playerMove === "scissors" && computerMove === "lizard") ||
+      (playerMove === "spock" && computerMove === "rock") ||
+      (playerMove === "lizard" && computerMove === "paper") ||
+      (playerMove === "rock" && computerMove === "scissors")
     ) {
       return "Player";
     } else {
@@ -53,7 +69,7 @@ export default function Home() {
   useEffect(() => {
     setTimeout(() => {
       setLoading(false);
-    }, 1000);
+    }, 2000);
     if (computerChoice === "" || move === "") {
       return;
     } else {
@@ -83,26 +99,26 @@ export default function Home() {
   }, [computerChoice, move, Duration]);
 
   useEffect(() => {
-    setScore(getStorageValue("score", "0"));
+    setScore(getStorageValue("scoreBonus", "0"));
     if (typeof window !== "undefined") {
       setDuration(window.innerWidth < 768 ? 3 : 5);
     }
   }, []);
 
   useEffect(() => {
-    localStorage.setItem("score", score.toString());
+    localStorage.setItem("scoreBonus", score.toString());
   }, [score]);
 
   return (
     <>
       <AnimatePresence mode="wait">{loading && <Loading />}</AnimatePresence>
       <AnimatePresence>
-        {modal && <RulesModal setModal={setModal} />}
+        {modal && <RulesModal bonus={true} setModal={setModal} />}
       </AnimatePresence>
       <main className="flex min-h-screen h-max flex-col items-center gap-14 sm:p-6 p-4 relative overflow-hidden mb-4 sm:mb-28 md:mb-0">
-        <NavBar score={score} />
+        <NavBar score={score} bonus={true} />
         <AnimatePresence mode="wait">
-          {winner === "" && <MainPage setMove={handleComputerTurn} />}
+          {winner === "" && <MainPageBonus setMove={handleComputerTurn} />}
         </AnimatePresence>
         {winner !== "" && (
           <FramerMotionAnimation
@@ -116,22 +132,10 @@ export default function Home() {
           />
         )}
         <Footer
-          href="/bonus"
-          LinkText="Try Bonus game? Click here"
+          href="/"
+          LinkText="Feeling Normal? Click here"
           setModal={setModal}
         />
-        {/* <button
-          onClick={() => setModal(true)}
-          className="mb-6 absolute md:bottom-8 md:right-8 bottom-0 right-1/2 md:translate-x-0 translate-x-1/2 px-10 text-xl py-2 border-2 border-white rounded-xl hover:rounded-3xl hover:px-14 transition-all duration-500"
-        >
-          Rules
-        </button>
-        <button
-          onClick={() => setModal(true)}
-          className="mb-6 absolute md:bottom-8 md:left-8 bottom-0 left-1/2 md:translate-x-0 -translate-x-1/2 px-10 text-xl py-2 border-2 border-white rounded-xl hover:rounded-3xl hover:px-14 transition-all duration-500"
-        >
-          Try Bonus game? Click here
-        </button> */}
       </main>
     </>
   );

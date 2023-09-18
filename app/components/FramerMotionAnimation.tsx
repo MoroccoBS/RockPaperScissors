@@ -56,6 +56,8 @@ function FightAnimation({
               boxShadow:
                 isWinner === "Computer" ? boxShadow.end : boxShadow.start,
               scale: isWinner === "Computer" ? 1.25 : 1,
+              opacity:
+                isWinner === "Computer" ? 1 : isWinner === "Player" ? 0.75 : 1,
             },
             { at: "<" },
           ],
@@ -65,6 +67,8 @@ function FightAnimation({
               boxShadow:
                 isWinner === "Player" ? boxShadow.end : boxShadow.start,
               scale: isWinner === "Player" ? 1.25 : 1,
+              opacity:
+                isWinner === "Player" ? 1 : isWinner === "Computer" ? 0.75 : 1,
             },
             { at: "<" },
           ],
@@ -87,7 +91,7 @@ function FightAnimation({
           [".comp", { x: 0, opacity: 1 }, { delay: 0.5, at: "<" }],
           [".compHolder", { opacity: 0 }, { delay: 1 }],
           [".compPlay", { opacity: 1, pointerEvents: "auto", scale: 1 }],
-          [".winningText", { y: "225%" }],
+          [".winningText", { y: "175%" }],
           [
             ".compPlay",
             {
@@ -142,7 +146,7 @@ function FightAnimation({
   return (
     <div
       ref={scope}
-      className="w-full h-max md:mt-10 mt-0 flex items-center justify-center p-4"
+      className="w-full h-max md:mt-10 mt-0 flex items-center justify-center md:p-4 p-0"
     >
       <motion.div
         initial={{ x: "-50", opacity: 0 }}
@@ -168,9 +172,9 @@ function FightAnimation({
       </motion.div>
       {isWinner !== undefined && (
         <div
-          className={`winningText opacity-0 absolute bottom-1/2 scale-50 flex flex-col justify-center items-center gap-6`}
+          className={`winningText opacity-0 absolute bottom-1/2 scale-50 flex flex-col justify-center items-center gap-4`}
         >
-          <h1 className="md:text-7xl text-6xl">
+          <h1 className="md:text-7xl text-5xl">
             {isWinner === "Player"
               ? "You Win"
               : isWinner === "Computer"
@@ -178,7 +182,7 @@ function FightAnimation({
               : "Draw"}
           </h1>
           <button
-            className="w-full md:text-4xl text-3xl p-2 rounded-xl bg-white text-DarkText "
+            className="md:text-4xl text-2xl py-2 px-4 rounded-xl bg-white text-DarkText hover:px-12 hover:rounded-3xl hover:shadow-2xl hover:-translate-y-1 hover:scale-105 transition-all duration-500"
             onClick={handlePlayAgain}
           >
             <h1 className="-translate-y-1">Play Again</h1>
